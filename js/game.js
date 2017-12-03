@@ -35,7 +35,7 @@ function render() {
                 "left": snake[i].x*pieceSize,
                 "top": snake[i].y*pieceSize
             },
-            src: "/img/dark.png"
+            src: "/snake/img/dark.png"
         }).appendTo($("#snake"));
     }
 }
@@ -56,7 +56,7 @@ function nextFruit() {
             "left": fruit.x*pieceSize,
             "top": fruit.y*pieceSize
         },
-        src: "/img/dark.png"
+        src: "/snake/img/dark.png"
     }).appendTo($("#table"));
 }
 

@@ -1,17 +1,17 @@
 @font-face {
     font-family: DS-Digital-i;
-    src: url(/font/DS-DIGII.TTF);
+    src: url(/snake/font/DS-DIGII.TTF);
 }
 
 @font-face {
 	font-family: Bistream Vera;
-	src: url(/font/VeraMono.ttf);
+	src: url(/snake/font/VeraMono.ttf);
 	font-weight: normal;
 }
 
 @font-face {
 	font-family: Bistream Vera;
-	src: url(/font/VeraMoBd.ttf);
+	src: url(/snake/font/VeraMoBd.ttf);
 	font-weight: bold;
 }
 
@@ -25,7 +25,7 @@ body {
 }
 
 #table {
-	background-image: url("/img/light.png");
+	background-image: url("/snake/img/light.png");
 	border: 5px solid black;
 	position: relative;
 	display: inline-block;
