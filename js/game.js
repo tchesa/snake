@@ -20,6 +20,8 @@ tabSize = new pair(10,20);
 // var snake = [new pair(2,0), new pair(1,0), new pair(0,0)];
 var snake;
 var fruit;
+var level = 1;
+var speed = 1000;
 
 var score = 0;
 var hiscore = localStorage.getItem("hiscore") | 0;
@@ -74,7 +76,7 @@ function move() {
     next.x = (next.x+tabSize.x)%tabSize.x;
     next.y = (next.y+tabSize.y)%tabSize.y;
 
-    if (next.x == fruit.x && next.y == fruit.y) {
+    if (next.x == fruit.x && next.y == fruit.y) { // take fruit
         score++;
         $("#score").text(formatScore(score));
         if (score > hiscore) {
@@ -82,6 +84,10 @@ function move() {
             localStorage.setItem("hiscore", hiscore);
             $("#hi-score").text(formatScore(hiscore));
         }
+
+        level = Math.floor(score/5)+1;
+        $("#level").text(level);
+
         nextFruit();
     } else {
         snake.pop();
@@ -101,7 +107,7 @@ function move() {
         $("#gameover").css("color", "black");
         $("#start").prop("disabled", false);
     } else {
-        setTimeout(move, 100);
+        setTimeout(move, speed/level);
     }
 }
 // move();
@@ -117,6 +123,8 @@ function init () {
     $("#gameover").css("color", "#63796b");
     dir = 'r';
     nextDir = 'r';
+    level = 1;
+    $("#level").text(level);
 }
 // init();
 
@@ -130,6 +138,7 @@ function formatScore (value) {
 }
 $("#hi-score").text(formatScore(hiscore));
 $("#score").text(formatScore(score));
+$("#level").text(level);
 
 document.addEventListener('keydown', function(event) {
     switch (event.keyCode) {
