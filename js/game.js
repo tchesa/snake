@@ -11,7 +11,8 @@ var pair = class pair {
     }
 };
 
-var direction = 'r';
+var dir = 'r';
+var nextDir = 'r';
 
 pieceSize = 32; // in px
 tabSize = new pair(10,20);
@@ -19,6 +20,8 @@ tabSize = new pair(10,20);
 // var snake = [new pair(2,0), new pair(1,0), new pair(0,0)];
 var snake;
 var fruit;
+var level = 1;
+var speed = 1000;
 
 var score = 0;
 var hiscore = localStorage.getItem("hiscore") | 0;
@@ -62,7 +65,8 @@ function nextFruit() {
 
 function move() {
     var next = new pair(snake[0].x, snake[0].y);
-    switch (direction) {
+    dir = nextDir;
+    switch (dir) {
         case 'r': next.translate(1,0); break;
         case 'l': next.translate(-1,0); break;
         case 'u': next.translate(0, -1); break;
@@ -72,7 +76,7 @@ function move() {
     next.x = (next.x+tabSize.x)%tabSize.x;
     next.y = (next.y+tabSize.y)%tabSize.y;
 
-    if (next.x == fruit.x && next.y == fruit.y) {
+    if (next.x == fruit.x && next.y == fruit.y) { // take fruit
         score++;
         $("#score").text(formatScore(score));
         if (score > hiscore) {
@@ -80,6 +84,10 @@ function move() {
             localStorage.setItem("hiscore", hiscore);
             $("#hi-score").text(formatScore(hiscore));
         }
+
+        level = Math.floor(score/5)+1;
+        $("#level").text(level);
+
         nextFruit();
     } else {
         snake.pop();
@@ -99,7 +107,7 @@ function move() {
         $("#gameover").css("color", "black");
         $("#start").prop("disabled", false);
     } else {
-        setTimeout(move, 300);
+        setTimeout(move, speed/level);
     }
 }
 // move();
@@ -113,6 +121,10 @@ function init () {
     setTimeout(move, 300);
     $("#start").prop("disabled", true);
     $("#gameover").css("color", "#63796b");
+    dir = 'r';
+    nextDir = 'r';
+    level = 1;
+    $("#level").text(level);
 }
 // init();
 
@@ -126,13 +138,14 @@ function formatScore (value) {
 }
 $("#hi-score").text(formatScore(hiscore));
 $("#score").text(formatScore(score));
+$("#level").text(level);
 
 document.addEventListener('keydown', function(event) {
     switch (event.keyCode) {
-        case 38: if (direction != 'd') direction = 'u'; break;
-        case 40: if (direction != 'u') direction = 'd'; break;
-        case 39: if (direction != 'l') direction = 'r'; break;
-        case 37: if (direction != 'r') direction = 'l'; break;
+        case 38: if (dir != 'd') nextDir = 'u'; break;
+        case 40: if (dir != 'u') nextDir = 'd'; break;
+        case 39: if (dir != 'l') nextDir = 'r'; break;
+        case 37: if (dir != 'r') nextDir = 'l'; break;
         default: break;
     }
 });

@@ -70,6 +70,7 @@ button {
     cursor: pointer;
     box-sizing: border-box;
     height: 52px;
+    margin-bottom: 30px;
 }
 
 button:hover {
