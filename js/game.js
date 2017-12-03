@@ -21,7 +21,7 @@ tabSize = new pair(10,20);
 var snake;
 var fruit;
 var level = 1;
-var speed = 1000;
+var speed = 800;
 
 var score = 0;
 var hiscore = localStorage.getItem("hiscore") | 0;
@@ -141,11 +141,16 @@ $("#score").text(formatScore(score));
 $("#level").text(level);
 
 document.addEventListener('keydown', function(event) {
+	// console.log(event.keyCode);
 	switch (event.keyCode) {
 		case 38: if (dir != 'd') nextDir = 'u'; break;
+		case 87: if (dir != 'd') nextDir = 'u'; break;
 		case 40: if (dir != 'u') nextDir = 'd'; break;
+		case 83: if (dir != 'u') nextDir = 'd'; break;
 		case 39: if (dir != 'l') nextDir = 'r'; break;
+		case 68: if (dir != 'l') nextDir = 'r'; break;
 		case 37: if (dir != 'r') nextDir = 'l'; break;
+		case 65: if (dir != 'r') nextDir = 'l'; break;
 		default: break;
 	}
 });
