@@ -125,6 +125,7 @@ function formatScore (value) {
     return str;
 }
 $("#hi-score").text(formatScore(hiscore));
+$("#score").text(formatScore(score));
 
 document.addEventListener('keydown', function(event) {
     switch (event.keyCode) {
